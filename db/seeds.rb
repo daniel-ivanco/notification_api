@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+company_name_list = %w[A AA AAC AACG AACQ AACQU AAIC AAL AAMC AAME AAN AAOI AAON AAP AAPL AAT AAU AAWW AB ABB ABBV ABC ABCB ABCL ABCM ABEO ABEV ABG ABGI ABIO ABM ABMD ABNB ABR ABST ABT ABTX ABUS AC ACA ACAC ACACU ACACW ACAD ACAHU ACB ACBAU ACBI ACC ACCD ACCO ACEL ACER ACET ACEV ACEVU ACEVW ACGL ACGLO ACGLP ACH ACHC ACHL ACHV ACI ACIC ACII ACIU ACIW ACKIT ACKIU ACKIW ACLS ACM ACMR ACN ACNB ACND ACOR ACP ACQRU ACR ACRE ACRS ACRX ACST ACTC ACTCU ACTCW AGS AGTC AGX AGYS AHAC AHACU AHACW AHC AHCO AHH AHPI AHT AI AIC AIF AIG AIH AIHS AIKI AIM AIMC AIN AINC AINV AIO AIR AIRC AIRG AIRI AIRT AIRTP AIRTW AIT AIV]
+company_name_list.each{|name| Company.create!(name: name)}
+
+Client.create!(name: 'Client nr 1')
+
+Company.first(40).each{|company| Client.first.client_companies.create!(company: company, weight: 0.025)}
