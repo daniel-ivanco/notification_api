@@ -10,5 +10,13 @@ company_name_list = %w[A AA AAC AACG AACQ AACQU AAIC AAL AAMC AAME AAN AAOI AAON
 company_name_list.each{|name| Company.create!(name: name)}
 
 Client.create!(name: 'Client nr 1')
+Client.create!(name: 'Client nr 2')
 
 Company.first(40).each{|company| Client.first.client_companies.create!(company: company, weight: 0.025)}
+Company.first(45).last(40).each{|company| Client.second.client_companies.create!(company: company, weight: 0.025)}
+
+AdminUser.create!(first_name: 'Admin', last_name: 'User', email: 'admin@user.test', password: 'passwd123', password_confirmation: 'passwd123')
+
+Client.first.notifications.create!(title: 'Test notification1', desc: 'This is a test notification')
+Client.first.notifications.create!(title: 'Test notification2', desc: 'This is a test notification 2')
+Client.first.notifications.create!(title: 'Test notification3', desc: 'This is a test notification 3')

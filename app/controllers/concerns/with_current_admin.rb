@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 # Authenticate
-module WithCurrentClient
+module WithCurrentAdmin
   extend ActiveSupport::Concern
 
   def authorize
-    return render_auth_error unless current_client
+    return render_auth_error unless current_admin
   end
 
-  def current_client
-    return unless client_uuid
+  def current_admin
+    return unless admin_uuid
 
-    @current_client ||= Client.where(uuid: client_uuid).take
+    @current_admin ||= AdminUser.where(uuid: admin_uuid).take
   end
 
-  def client_uuid
+  def admin_uuid
     decoded_jwt&.first&.dig('sub')
   end
 

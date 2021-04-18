@@ -2,8 +2,8 @@
 
 # portfolio serializer
 class ClientInvestmentPortfolioSerializer
-  def initialize(client_id:)
-    @client = Client.includes(:client_companies, :companies).find(client_id)
+  def initialize(client:)
+    @client = Client.includes(:client_companies, :companies).find(client.id)
   end
 
   def to_json(*_args)
@@ -12,14 +12,20 @@ class ClientInvestmentPortfolioSerializer
 
   def to_h
     {
-      investment_portfolio_performance: client.portfolio_performance,
-      companies: companies,
+      client_investment_portfolio: {
+        portfolio_performance: portfolio_performance,
+        portfolio_companies: companies,
+      }
     }
-  end
+end
 
   private
 
   attr_reader :client
+
+  def portfolio_performance
+    ::Clients::PortfolioPerformanceGetter.new(client: client).call
+  end
 
   def companies
     client.client_companies.map do |client_company|

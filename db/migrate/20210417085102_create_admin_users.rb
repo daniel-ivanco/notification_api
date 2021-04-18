@@ -6,6 +6,8 @@ class CreateAdminUsers < ActiveRecord::Migration[5.2]
       t.uuid :uuid, default: 'gen_random_uuid()'
       t.string :first_name
       t.string :last_name
+      t.string :email
+      t.string :password_digest
       t.index :uuid, unique: true
 
       t.timestamps

@@ -3,7 +3,10 @@
 module ClientApi
   # investment portfolio controller
   class InvestmentPortfolioController < BaseController
+    before_action :authorize
+
     def show
-      render json: ClientInvestmentPortfolioSerializer.new(client_id: current_client.id).to_json
+      render json: ClientInvestmentPortfolioSerializer.new(client: current_client).to_json
     end
+  end
 end
