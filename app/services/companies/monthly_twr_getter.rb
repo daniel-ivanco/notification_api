@@ -1,5 +1,7 @@
 module Companies
   class MonthlyTwrGetter
+    DAYS_IN_THE_PAST = 30
+
     def initialize(company:)
       @company = company
     end
@@ -23,7 +25,17 @@ module Companies
     end
 
     def update_monthly_twr
-      ::Companies::MonthlyTwrUpdater.new(company: company).call
+      ::Companies::MonthlyTwrUpdater.new(company: company, monthly_twr: monthly_twr).call
+    end
+
+    def monthly_twr
+      @monthly_twr ||= TwrCalculator.new(daily_prices: daily_prices).call
+    end
+
+    def daily_prices
+      @daily_prices ||= Prices::LastDaysPriceGetter.new(
+        company_name: company.name, last_days_number: DAYS_IN_THE_PAST
+      ).call
     end
   end
 end

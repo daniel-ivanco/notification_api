@@ -1,7 +1,7 @@
 module Companies
   module Prices
-    class DailyPriceGetter
-      def initialize(company_name:, last_days_number: 30)
+    class LastDaysPriceGetter
+      def initialize(company_name:, last_days_number:)
         @company_name = company_name
         @last_days_number = last_days_number
       end

@@ -1,7 +1,7 @@
 module Companies
-  class MonthlyTwrCalculator
-    def initialize(company:)
-      @company = company
+  class TwrCalculator
+    def initialize(daily_prices:)
+      @daily_prices = daily_prices
     end
 
     def call
@@ -10,7 +10,7 @@ module Companies
 
     private
 
-    attr_reader :company
+    attr_reader :daily_prices
 
     def monthly_twr
       @monthly_twr ||= rate_of_returns.reduce(:*) - 1
@@ -23,11 +23,7 @@ module Companies
     end
 
     def rate_of_return(price)
-      ( price[:close] - price[:open] ) / price[:open]
-    end
-
-    def daily_prices
-      @daily_prices ||= Prices::DailyPriceGetter.new(company_name: company.name).call
+      ( price[:close] - price[:open].to_f ) / price[:open].to_f
     end
   end
 end

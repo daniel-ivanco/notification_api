@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_193240) do
   end
 
   create_table "client_companies", force: :cascade do |t|
-    t.float "weight", null: false
+    t.float "weight", default: 0.025
     t.integer "client_id"
     t.integer "company_id"
     t.datetime "created_at", null: false

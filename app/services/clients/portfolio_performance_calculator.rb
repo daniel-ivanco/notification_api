@@ -18,7 +18,7 @@ module Clients
 
     def wieghted_monthly_twrs
       client_companies.map do |client_company|
-        monthly_twr(client_company.company) * client_company.weight
+        monthly_twr(client_company.company) * client_company.weight.to_f
       end
     end
 
