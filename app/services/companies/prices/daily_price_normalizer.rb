@@ -2,6 +2,7 @@
 
 module Companies
   module Prices
+    # normalizes passed daily_prices to have correct format
     class DailyPriceNormalizer
       def initialize(daily_prices:)
         @daily_prices = daily_prices

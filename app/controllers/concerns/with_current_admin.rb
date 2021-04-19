@@ -21,7 +21,7 @@ module WithCurrentAdmin
   def decoded_jwt
     @decoded_jwt ||= JWT.decode jwt, Rails.application.credentials[Rails.env.to_sym][:auth_private_key], true,
                                 { verify_iat: true, algorithm: 'HS256' }
-  rescue JWT::DecodeError => e
+  rescue JWT::DecodeError
     nil
   end
 

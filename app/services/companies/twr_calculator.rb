@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Companies
+  # calculates TWR
   class TwrCalculator
     def initialize(daily_prices:)
       @daily_prices = daily_prices

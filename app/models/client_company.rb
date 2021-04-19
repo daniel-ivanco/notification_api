@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# company model
 class ClientCompany < ApplicationRecord
   MAX_COMPANY_LIMIT = 40
 

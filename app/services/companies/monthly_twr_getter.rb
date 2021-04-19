@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Companies
+  # gets company's monthly TWR or calculates a new one if actual is outdated
   class MonthlyTwrGetter
     DAYS_IN_THE_PAST = 30
 

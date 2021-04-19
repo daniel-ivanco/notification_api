@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Companies
+  # updates monhtly TWR for a company
   class MonthlyTwrUpdater
     attr_reader :company, :monthly_twr
 

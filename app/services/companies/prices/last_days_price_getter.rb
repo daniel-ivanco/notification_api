@@ -2,6 +2,7 @@
 
 module Companies
   module Prices
+    # gets last N days daily prices for a company
     class LastDaysPriceGetter
       def initialize(company_name:, last_days_number:)
         @company_name = company_name

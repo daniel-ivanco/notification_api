@@ -14,7 +14,7 @@ module ActiveSupport
     include FactoryBot::Syntax::Methods
 
     def with_mocked_daily_prices_fetcher(count: 1, &block)
-      daily_prices = JSON.parse(file_fixture('alphavantage_daily_prices.json').read)
+      daily_prices = ::JSON.parse(file_fixture('alphavantage_daily_prices.json').read)
       @mock = Minitest::Mock.new
       @mock_result = MockClass.new(daily_prices)
       count.times do

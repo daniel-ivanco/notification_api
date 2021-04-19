@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Clients
+  # gets client's current portfolio performance or calculates a new one if the original is outdated
   class PortfolioPerformanceGetter
     def initialize(client:)
       @client = client

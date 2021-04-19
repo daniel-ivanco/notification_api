@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Clients
+  # update's client's perf portfolio
   class PortfolioPerformanceUpdater
     attr_reader :client, :portfolio_performance
 

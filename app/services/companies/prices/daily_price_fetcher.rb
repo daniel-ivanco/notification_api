@@ -2,6 +2,7 @@
 
 module Companies
   module Prices
+    # fetches actual daily prices from 'www.alphavantage.co
     class DailyPriceFetcher
       DOMAIN = 'www.alphavantage.co'
       BASE_URL = "https://#{DOMAIN}/query"

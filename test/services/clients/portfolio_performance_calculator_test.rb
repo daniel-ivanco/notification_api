@@ -27,6 +27,7 @@ class PortfolioPerformanceCalculatorTest < ActiveSupport::TestCase
 
   private
 
+  # rubocop:disable Metrics/MethodLength
   def with_mocked_monthly_twr_getter(monthly_twrs:, &block)
     @mock = Minitest::Mock.new
 
@@ -46,4 +47,5 @@ class PortfolioPerformanceCalculatorTest < ActiveSupport::TestCase
 
     @mock.verify
   end
+  # rubocop:enable Metrics/MethodLength
 end

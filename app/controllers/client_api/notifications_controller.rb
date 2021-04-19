@@ -8,8 +8,9 @@ module ClientApi
     PER_PAGE = 100
 
     def index
+      limit_offset = PER_PAGE * (page - 1)
       notification_assignments =
-        current_client.notification_assignments.includes(:notification).limit(PER_PAGE).offset(PER_PAGE * (page - 1)).all
+        current_client.notification_assignments.includes(:notification).limit(PER_PAGE).offset(limit_offset).all
       ::Notifications::SeenNotificationsMarker.new(notification_assignments: notification_assignments).call
 
       render json: ClientNotificationsSerializer.new(notification_assignments: notification_assignments).to_json

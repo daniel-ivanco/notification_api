@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module AdminUsers
+  # authenticates user using passed credentials
   class Authenticator
     def initialize(email:, password:)
       @email = email

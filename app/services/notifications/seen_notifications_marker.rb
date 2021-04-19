@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Notifications
+  # marks notification assignments as seen by a client
   class SeenNotificationsMarker
     def initialize(notification_assignments:)
       @notification_assignments = notification_assignments

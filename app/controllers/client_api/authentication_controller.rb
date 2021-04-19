@@ -3,6 +3,9 @@
 module ClientApi
   # authentication controller
   class AuthenticationController < BaseController
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
+
     def authenticate
       return render json: { error: validator.errors }, status: :bad_request unless validator.valid?
 
@@ -20,6 +23,8 @@ module ClientApi
         render json: { error: 'Invalid client auth_key' }, status: :unauthorized
       end
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     private
 

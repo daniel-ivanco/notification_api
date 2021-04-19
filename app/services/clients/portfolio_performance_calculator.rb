@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Clients
+  # calculates portfolio performance for a client's companies
   class PortfolioPerformanceCalculator
     def initialize(client_id:)
       @client_companies = Client.includes(:client_companies, :companies).find(client_id).client_companies
