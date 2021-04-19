@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AdminUsers
   class Authenticator
     def initialize(email:, password:)
@@ -30,7 +32,7 @@ module AdminUsers
     end
 
     def authenticate_user
-      return true if admin_user && admin_user.authenticate(password)
+      return true if admin_user&.authenticate(password)
 
       admin_user.errors.add :user_authentication, 'invalid credentials'
       false

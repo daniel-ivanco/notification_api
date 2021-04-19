@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Companies
   class MonthlyTwrGetter
     DAYS_IN_THE_PAST = 30

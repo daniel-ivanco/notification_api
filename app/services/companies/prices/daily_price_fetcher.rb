@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Companies
   module Prices
     class DailyPriceFetcher
-      DOMAIN = 'www.alphavantage.co'.freeze
-      BASE_URL = "https://#{DOMAIN}/query".freeze
+      DOMAIN = 'www.alphavantage.co'
+      BASE_URL = "https://#{DOMAIN}/query"
 
       def initialize(company_name:)
         @company_name = company_name
@@ -28,7 +30,7 @@ module Companies
       end
 
       def server_error
-        parsed_response.dig('Error Message')
+        parsed_response['Error Message']
       end
 
       def parsed_response

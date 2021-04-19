@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Companies
   module Prices
     class DailyPriceNormalizer
