@@ -23,7 +23,7 @@ module Companies
     end
 
     def rate_of_return(price)
-      ( price[:close] - price[:open].to_f ) / price[:open].to_f
+      (price[:close] - price[:open].to_f) / price[:open].to_f
     end
   end
 end

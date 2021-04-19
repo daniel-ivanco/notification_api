@@ -19,7 +19,7 @@ module Companies
       end
 
       def ordered_daily_prices
-        fetched_prices.sort_by { |k,v| Date.strptime(k, '%Y-%m-%d') }
+        fetched_prices.sort_by { |k, _v| Date.strptime(k, '%Y-%m-%d') }
       end
 
       def last_days_prices

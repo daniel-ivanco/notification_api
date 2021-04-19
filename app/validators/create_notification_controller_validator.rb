@@ -7,7 +7,7 @@ class CreateNotificationControllerValidator
   attr_reader :title, :desc, :active
 
   validates :title, :desc, :active, presence: true
-  validates :active, inclusion: { in: [ 'true', 'false' ], message: "is not boolean" }
+  validates :active, inclusion: { in: %w[true false], message: 'is not boolean' }
 
   def initialize(params:)
     @title = params[:title]

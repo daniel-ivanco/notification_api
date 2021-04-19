@@ -12,6 +12,6 @@ class ClientCompany < ApplicationRecord
   private
 
   def validate_max_company_limit
-    errors.add(:companies, "max limit exceeded") if client.companies.reload.size >= MAX_COMPANY_LIMIT
+    errors.add(:companies, 'max limit exceeded') if client.companies.reload.size >= MAX_COMPANY_LIMIT
   end
 end

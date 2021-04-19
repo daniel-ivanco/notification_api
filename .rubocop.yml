@@ -1,0 +1,11 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - bin/**/*
+    - config/**/*
+    - db/**/*
+    - tmp/**/*
+    - node_modules/**/*
+    - Rakefile
+    - config.ru
+    - test/factories/**/*

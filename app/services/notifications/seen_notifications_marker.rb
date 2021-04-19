@@ -5,7 +5,7 @@ module Notifications
     end
 
     def call
-      notification_assignments.each{ |notification_assignment| mark_as_seen(notification_assignment) }
+      notification_assignments.each { |notification_assignment| mark_as_seen(notification_assignment) }
     end
 
     private

@@ -34,6 +34,6 @@ module WithCurrentClient
   end
 
   def render_auth_error
-      render json: { type: 'authentication required' }, status: :unauthorized
+    render json: { type: 'authentication required' }, status: :unauthorized
   end
 end

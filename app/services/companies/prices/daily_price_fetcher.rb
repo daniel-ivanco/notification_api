@@ -1,7 +1,7 @@
 module Companies
   module Prices
     class DailyPriceFetcher
-      DOMAIN = "www.alphavantage.co".freeze
+      DOMAIN = 'www.alphavantage.co'.freeze
       BASE_URL = "https://#{DOMAIN}/query".freeze
 
       def initialize(company_name:)
@@ -28,7 +28,7 @@ module Companies
       end
 
       def server_error
-        parsed_response.dig("Error Message")
+        parsed_response.dig('Error Message')
       end
 
       def parsed_response
@@ -42,7 +42,7 @@ module Companies
       end
 
       def response
-          RestClient.get("#{BASE_URL}", {params: params})
+        RestClient.get(BASE_URL.to_s, { params: params })
       end
     end
   end

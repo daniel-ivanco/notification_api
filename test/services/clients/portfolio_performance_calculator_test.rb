@@ -14,7 +14,9 @@ class PortfolioPerformanceCalculatorTest < ActiveSupport::TestCase
       Company.create!(name: "name_#{n}")
     end
 
-    Company.first(companies_count).each{|company| Client.first.client_companies.create!(company: company, weight: weight)}
+    Company.first(companies_count).each do |company|
+      Client.first.client_companies.create!(company: company, weight: weight)
+    end
 
     with_mocked_monthly_twr_getter(monthly_twrs: monthly_twrs) do
       monthly_twr = ::Clients::PortfolioPerformanceCalculator.new(client_id: client.id).call

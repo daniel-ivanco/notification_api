@@ -20,7 +20,7 @@ class ClientTest < ActiveSupport::TestCase
     assert_raises ActiveRecord::RecordInvalid do
       Company
         .first(ClientCompany::MAX_COMPANY_LIMIT + 1)
-        .each{|company| client.client_companies.create!(company: company, weight: 0.025)}
+        .each { |company| client.client_companies.create!(company: company, weight: 0.025) }
     end
   end
 end

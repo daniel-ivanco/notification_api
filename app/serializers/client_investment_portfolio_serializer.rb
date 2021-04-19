@@ -14,10 +14,10 @@ class ClientInvestmentPortfolioSerializer
     {
       client_investment_portfolio: {
         portfolio_performance: portfolio_performance,
-        portfolio_companies: companies,
+        portfolio_companies: companies
       }
     }
-end
+  end
 
   private
 

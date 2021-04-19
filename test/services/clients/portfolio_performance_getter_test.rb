@@ -10,7 +10,7 @@ class PortfolioPerformanceGetterTest < ActiveSupport::TestCase
       Company.create!(name: "name_#{n}")
     end
 
-    Company.first(5).each{|company| @client.client_companies.create!(company: company, weight: 0.025)}
+    Company.first(5).each { |company| @client.client_companies.create!(company: company, weight: 0.025) }
   end
 
   test 'recalculating and updating nonexisting portfolio performance for a client' do
