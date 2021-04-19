@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class PortfolioPerformanceCalculator < ActiveSupport::TestCase
+class PortfolioPerformanceCalculatorTest < ActiveSupport::TestCase
   test 'portfolio calculation correctness' do
     client = create(:client)
     monthly_twrs = [1.12, 2.5, 3.5, -4.5]

@@ -2,14 +2,16 @@
 
 # jwt token generator
 class JwtGenerator
-  attr_reader :sub
+  attr_reader :sub, :exp
 
-  def initialize(sub:)
+  def initialize(sub:, exp: 900)
     @sub = sub
+    @exp = exp
   end
 
   def call
     jwt_payload = {
+      exp: Time.now.to_i + exp,
       sub: sub,
       iat: Time.now.to_i,
       iss: 'yova'

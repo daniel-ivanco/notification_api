@@ -22,8 +22,12 @@ module Clients
       !client.portfolio_calculated_at.today?
     end
 
+    def portfolio_performance
+      PortfolioPerformanceCalculator.new(client_id: client.id).call
+    end
+
     def update_portfolio_performance
-      PortfolioPerformanceUpdater.new(client: client).call
+      PortfolioPerformanceUpdater.new(client: client, portfolio_performance: portfolio_performance).call
     end
   end
 end

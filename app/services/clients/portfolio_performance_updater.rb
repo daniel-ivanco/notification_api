@@ -1,7 +1,10 @@
 module Clients
   class PortfolioPerformanceUpdater
-    def initialize(client:)
+    attr_reader :client, :portfolio_performance
+
+    def initialize(client:, portfolio_performance:)
       @client = client
+      @portfolio_performance = portfolio_performance
     end
 
     def call
@@ -9,14 +12,6 @@ module Clients
       client.portfolio_calculated_at = Time.now
 
       client.save!
-    end
-
-    private
-
-    attr_reader :client
-
-    def portfolio_performance
-      @portfolio_performance ||= PortfolioPerformanceCalculator.new(client_id: client.id).call
     end
   end
 end

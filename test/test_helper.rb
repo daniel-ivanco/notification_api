@@ -10,12 +10,13 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   include FactoryBot::Syntax::Methods
 
-  def with_mocked_daily_prices_fetcher(&block)
-    daily_prices = JSON.parse(file_fixture('daily_prices.json').read)
+  def with_mocked_daily_prices_fetcher(count: 1, &block)
+    daily_prices = JSON.parse(file_fixture('alphavantage_daily_prices.json').read)
     @mock = Minitest::Mock.new
     @mock_result = MockClass.new(daily_prices)
-    @mock.expect(:call, @mock_result, [Object])
-
+    count.times do
+      @mock.expect(:call, @mock_result, [Object])
+    end
     ::Companies::Prices::DailyPriceFetcher.stub :new, @mock, &block
 
     @mock.verify
