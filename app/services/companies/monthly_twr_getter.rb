@@ -20,9 +20,7 @@ module Companies
     attr_reader :company
 
     def twr_outdated?
-      return true if company.monthly_twr.blank?
-
-      return true if company.twr_calculated_at.blank?
+      return true if company.monthly_twr.blank? || company.twr_calculated_at.blank?
 
       !company.twr_calculated_at.today?
     end

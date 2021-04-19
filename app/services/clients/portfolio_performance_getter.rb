@@ -18,9 +18,7 @@ module Clients
     attr_reader :client
 
     def portfolio_performance_outdated?
-      return true if client.portfolio_performance.blank?
-
-      return true if client.portfolio_calculated_at.blank?
+      return true if client.portfolio_performance.blank? || client.portfolio_calculated_at.blank?
 
       !client.portfolio_calculated_at.today?
     end
