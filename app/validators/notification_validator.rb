@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# CreateNotificationController validations
-class CreateNotificationControllerValidator
+# Notification validations
+class NotificationValidator
   include ActiveModel::Validations
 
   attr_reader :title, :desc, :active

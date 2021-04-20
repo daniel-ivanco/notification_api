@@ -16,7 +16,7 @@ services:
       - notification-api-db
     container_name: notification-api-container
     environment:
-      - RAILS_ENV=development
+      - RAILS_ENV=production
       - DATABASE_URL=postgresql://notification-api:notification-api@notification-api-db:5432
       - RUBYOPT=-W:no-deprecated -W:no-experimental
       - BUNDLE_PATH=/home/deploy/app/.bundle
@@ -31,6 +31,6 @@ services:
     environment:
       POSTGRES_USER: notification-api
       POSTGRES_PASSWORD: notification-api
-      POSTGRES_DB: development
+      POSTGRES_DB: production
     volumes:
       - notification_api_db:/var/lib/postgresql/data:delegated

@@ -16,7 +16,7 @@ module ClientApi
     private
 
     def validator
-      @validator ||= ClientAuthControllerValidator.new(params: params)
+      @validator ||= ClientAuthValidator.new(params: params)
     end
 
     def current_client_uuid

@@ -18,7 +18,7 @@ module AdminApi
     private
 
     def validator
-      @validator ||= AdminAuthControllerValidator.new(params: params)
+      @validator ||= AdminAuthValidator.new(params: params)
     end
   end
 end

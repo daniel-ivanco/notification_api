@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# NotificationAssignmentsController validations
-class NotificationAssignmentsControllerValidator
+# Notification Assignments validations
+class NotificationAssignmentsValidator
   include ActiveModel::Validations
 
   attr_reader :client_id, :notification_id

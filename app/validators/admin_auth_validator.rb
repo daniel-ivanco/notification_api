@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Admin AuthController validations
-class AdminAuthControllerValidator
+# Admin Auth validations
+class AdminAuthValidator
   include ActiveModel::Validations
 
   attr_reader :email, :password

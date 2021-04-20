@@ -37,7 +37,7 @@ module AdminApi
     end
 
     def create_validator
-      @create_validator ||= CreateNotificationControllerValidator.new(params: safe_create_params)
+      @create_validator ||= NotificationValidator.new(params: safe_create_params)
     end
 
     def safe_create_params

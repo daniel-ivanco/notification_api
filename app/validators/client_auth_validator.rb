@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Client AuthController validations
-class ClientAuthControllerValidator
+# Client Auth validations
+class ClientAuthValidator
   include ActiveModel::Validations
 
   attr_reader :auth_key
