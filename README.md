@@ -2,6 +2,21 @@
 ### Basic Description
 This is a Ruby on Rails backend implementing B2B performance notification API. It allows sending notifications to B2B partners regarding their investment portfolio and portfolio performance through a REST API. The application uses `www.alphavantage.co` API to fetch real stock prices.
 
+### Code architecture overview
+When implementing this task I wanted to use as few gems as possible, so different parts of the codebase stay explicit and are easily understandable without the need for knowledge of various gems and their DSLs. In general, I tried to stick to pragmatic separation of concerns and conform to single responsibility principle (to a reasonable extent).
+
+#### Models
+For the purpose of this task, models are simple and thin ActiveRecord objects implementing mainly DB level validations.
+
+#### Business Logic
+To implement business logic I am using Rails Service Objects and Command Pattern which I find easy to understand and scalable for bigger codebases. When designing services, I try to couple services dealing with similar use cases together.
+
+#### Controllers
+Controllers are thin and never contain any business or validation logic. For all index controller actions (when listing array of resources) I use simple pagination mechanism.
+
+#### Serializers
+There are separate serializers for every resource that is passed to the API.
+
 ### Running and testing the application
 There are 2 options to run the application:
   - In a local machine environment (development mode)
@@ -15,8 +30,8 @@ To run the application on your local machine environment you need to have preins
 
 Next, you need to clone this repo and run these commands inside the folder where the repo is cloned:
   1. `bundle install`
-  2. `rails db:migrate`
-  3. `rails db:seed`
+  2. `rails db:setup`
+  4. `export RUBYOPT='-W:no-deprecated'`
 
 You can run tests using this command `rails test`.
 
@@ -29,8 +44,8 @@ The server is running now in development mode and listens on port 3000. It can b
 To run the application using Docker you need to have Docker preinstalled on your machine.
 Next, you need to clone this repo and run these commands inside the folder where the repo is cloned:
   1. `docker-compose build`
-  2. `docker-compose run --rm notification-api sh -c "bundle install"`
-  3. `docker-compose run --rm notification-api sh -c "rails db:create RAILS_ENV=production; rails db:migrate RAILS_ENV=production; rails db:seed RAILS_ENV=production"`
+  2. `docker-compose run --rm notification-api bundle install`
+  3. `docker-compose run --rm notification-api rails db:setup RAILS_ENV=production`
   4. `docker-compose run --rm notification-api sh -c "rails db:create RAILS_ENV=test; rails db:migrate RAILS_ENV=test"`
 
 You can run tests using this command `docker-compose run --rm notification-api rails test`.
@@ -46,7 +61,7 @@ The backend consists of 2 APIs:
   - Client API
 
 #### Admin API
-Are used by the company's admin employees. Prior to using the API, authentication is required to obtain JWT auth token which is required to be passed as a bearer token in the Authorization request header when using the API. For purpose of this exercise there is created 1 Admin user with these credentials:
+Are used by the company's admin employees. Prior to using the API, authentication is required to obtain JWT auth token which is required to be passed as a bearer token in the Authorization request header. For purpose of this exercise there is created 1 Admin user with these credentials:
  - email: `admin@user.test`
  - password: `passwd123`
 
@@ -66,7 +81,7 @@ Are used by the company's admin employees. Prior to using the API, authenticatio
 
 
 #### Client API
-Are used by the company's B2B partners. Prior to using the API, authentication is required to obtain JWT auth token which is required to be passed as a bearer token in the Authorization request header when using the API. For purpose of this exercise there are created 2 clients these secret keys:
+Are used by the company's B2B partners. Prior to using the API, authentication is required to obtain JWT auth token which is required to be passed as a bearer token in the Authorization request header. For purpose of this exercise there are created 2 clients with these secret keys:
  - client_1: `jEGHzpHurQsX4m9VD8meJg`
  - client_2: `0LMLjxFM9E9LW5n0uK5hqQ`
 
@@ -75,8 +90,14 @@ Are used by the company's B2B partners. Prior to using the API, authentication i
  * `export CLIENT2_AUTH_KEY=$(curl -d "auth_key=0LMLjxFM9E9LW5n0uK5hqQ" -X POST http://localhost:3000/client_api/authenticate)`
 
 ##### The API has following functions:
-  * Get all assigned notifications for a specific client. Run this command:
+  * Get all assigned notifications for client_1. Run this command:
     * `curl -H "Authorization: Bearer $CLIENT1_AUTH_KEY" http://localhost:3000/client_api/notifications`
-  * Get client's own investment portfolio. Run this command:
+  * Get client_1's own investment portfolio. Run this command:
     * `curl -H "Authorization: Bearer $CLIENT1_AUTH_KEY" http://localhost:3000/client_api/investment_portfolio`
-    * __IMPORTANT__: Please bear in mind that the application uses a free Alphavantage account to retrieve prices for companies inside the portfolio. This free account is limited to fetch 5 requests per minute, which means it takes about 8 minutes to fetch fresh data for a portfolio (40 companies). But this delay applies only to the first call of a current day. All the following calls that day are instant as the company's price information is stored locally for future calculations.
+    * __IMPORTANT__: Please bear in mind that the application uses a free Alphavantage account to retrieve prices for companies inside the portfolio. This free account is limited to fetch 5 requests per minute, which means it takes about __8 minutes__ to fetch fresh data for a portfolio (40 companies). But this delay applies only to the first call of a current day. All the following calls that day are instant as the company's price information is stored locally for future calculations. The next day, when new price information is needed, another one time 8-minute long call will take place for relevant companies, etc
+
+
+### Discussion
+Notes worth mentioning:
+* This application uses Rails Credentials to store secret keys. To keep it simple, this repo contains `config/master.key` file, even though it is considered a BAD practice. In real world scenario, this file should be shared using secure communication channels.
+* To avoid long delay calls when getting client's investment portfolio information, we could schedule regular jobs every morning to request investment portfolio for every client to store values locally and make the following calls instant for that day.
