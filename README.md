@@ -45,7 +45,7 @@ To run the application using Docker you need to have Docker preinstalled on your
 Next, you need to clone this repo and run these commands inside the folder where the repo is cloned:
   1. `docker-compose build`
   2. `docker-compose run --rm notification-api bundle install`
-  3. `docker-compose run --rm notification-api rails db:setup RAILS_ENV=production`
+  3. `docker-compose run --rm notification-api sh -c "rails db:create; rails db:migrate"`
   4. `docker-compose run --rm notification-api sh -c "rails db:create RAILS_ENV=test; rails db:migrate RAILS_ENV=test"`
 
 You can run tests using this command `docker-compose run --rm notification-api rails test`.
